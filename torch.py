@@ -124,7 +124,7 @@ def evaluate_sr_model(generator, dataloader):
     psnr_avg = psnr_total / len(dataloader)
     ssim_avg = ssim_total / len(dataloader)
     print(f"Average PSNR: {psnr_avg:.4f}, SSIM: {ssim_avg:.4f}")
-
+ 
 def check_data_range(dataloader):
     for lr_imgs, _ in dataloader:
         print("Min pixel value:", lr_imgs.min().item())
@@ -132,23 +132,7 @@ def check_data_range(dataloader):
         break
 
 # Main function to train and save the model
-def main(image_path=None):
-    # Initialize model
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    generator = Generator().to(device)
-    discriminator = Discriminator().to(device)
 
-    # Load DIV2K dataset for training
-    dataset = load_div2k_dataset(r'C:/Users/karti/super/Dataset')
-    dataloader = torch.utils.data.DataLoader(dataset, batch_size=8, shuffle=True)
 
-    # Train the ESRGAN model and save the generator
-    train_esrgan(generator, discriminator, dataloader, num_epochs=5, save_path='generator_model.pth', encoding="utf-8")
-
-    # Evaluate the model
-    evaluate_sr_model(generator, dataloader)
-
-if __name__ == '__main__':
-    main()
 
 
